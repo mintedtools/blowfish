@@ -1,0 +1,90 @@
+{{ define "main" }}
+
+<div class="container mx-auto px-4">
+  <article class="prose dark:prose-invert max-w-none">
+
+    <h1>{{ .Params.brand }} {{ .Params.device }} {{ .Params.code }} Error Code – {{ .Params.meaningshort }}</h1>
+
+    {{ if .Params.adsense_top }}
+      {{ partial "adsense-top.html" . }}
+    {{ end }}
+
+    <h2>Meaning</h2>
+    <p><strong>{{ .Params.meaningshort }}</strong></p>
+    <p>{{ .Params.meaninglong }}</p>
+
+    <h2>Symptoms</h2>
+    <ul>
+      {{ range .Params.symptoms }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+
+    <h2>Causes</h2>
+    <ul>
+      {{ range .Params.causes }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+
+    {{ if .Params.adsense_mid }}
+      {{ partial "adsense-mid.html" . }}
+    {{ end }}
+
+    <h2>Step-by-Step Fixes</h2>
+    <ul>
+      {{ range .Params.stepfixes }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+
+    <h2>Safety Notes</h2>
+    <ul>
+      {{ range .Params.safetynotes }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+
+    <h2>Applicable Models</h2>
+    <details>
+      <summary>Show Models</summary>
+      <ul>
+        {{ range .Params.modellist }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </details>
+
+    <h2>Related Pages</h2>
+    <ul>
+      {{ range .Params.internallinks }}
+        <li><a href="{{ . }}">{{ . }}</a></li>
+      {{ end }}
+    </ul>
+
+    <h2>Model-Specific Notes</h2>
+    <p>{{ .Params.model_specific }}</p>
+
+    {{ if .Params.adsense_bottom }}
+      {{ partial "adsense-bottom.html" . }}
+    {{ end }}
+
+
+    <h2>Disclaimer</h2>
+    <p class="text-sm text-neutral-600 dark:text-neutral-400">
+      The information provided on this page is for educational and informational purposes only. 
+      Repairs involve electrical, mechanical, and water-related risks. 
+      Always follow manufacturer instructions and consider contacting a qualified technician 
+      for diagnosis or repair. The owner of this website is not responsible for any damage, 
+      injury, or loss resulting from the use or misuse of the information provided.
+    </p>
+
+
+    <script type="application/ld+json">
+      {{ .Params.schema_json | safeJS }}
+    </script>
+
+  </article>
+</div>
+
+{{ end }}

@@ -30,16 +30,19 @@
 
   {{ if site.Params.taxonomy.cardView }}
     <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-      {{ range .Data.Terms }}
-        {{ partial "term-link/card.html" . }}
-      {{ end }}
+{{ range sort .Data.Terms "Title" "asc" }}
+  {{ partial "term-link/text.html" . }}
+{{ end }}
+
     </section>
   {{ else }}
 
-    <section class="flex flex-wrap max-w-prose -mx-2 overflow-hidden">
-      {{ range .Data.Terms }}
-        {{ partial "term-link/text.html" . }}
-      {{ end }}
-    </section>
+<section class="flex flex-wrap max-w-prose -mx-2 overflow-hidden">
+  {{ $terms := sort .Data.Terms "Page.Title" "asc" }}
+  {{ range $terms }}
+    {{ partial "term-link/text.html" . }}
   {{ end }}
+</section>
+
+{{ end }}
 {{ end }}
